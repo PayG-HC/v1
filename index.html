@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/paygi/Logopagy.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PAYG</title>
+    <script type="text/javascript">
+      // Handle redirect from the 404.html page
+      (function () {
+        const query = window.location.search.substr(1);
+        const params = {};
+        query.split("&").forEach(function (param) {
+          const pair = param.split("=");
+          params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+        });
+
+        // If we have a redirect query, force reload to the path
+        if (params.redirect) {
+          const redirectPath = params.redirect;
+          window.location.replace("/paygi/" + redirectPath);
+        }
+
+        // Fallback: Check for stored path in localStorage
+        const storedPath = window.localStorage.getItem("redirect_path");
+        if (storedPath && !params.redirect) {
+          window.localStorage.removeItem("redirect_path");
+          window.location.replace("/paygi/" + storedPath);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/paygi/assets/index-BcMbvjEB.js"></script>
+    <link rel="stylesheet" crossorigin href="/paygi/assets/index-DTrH7u6p.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
